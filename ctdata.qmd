@@ -1,0 +1,44 @@
+---
+title: "COVID-19 Trials by Status"
+author: "Sanket Sinojia"
+format: html
+---
+
+```{r lib, include=FALSE}
+
+# Calling required packages
+
+library(tidyverse)
+library(ggplot2)
+library(hrbrthemes)
+library(janitor)
+library(ggcharts)
+
+# Reading covid-19 trials data
+cvd <- read_csv("covid_19.csv") %>%
+  clean_names()
+
+n <- nrow(cvd)
+
+```
+
+```{r graphs, include=TRUE, echo=FALSE}
+# Creating graph
+
+cvd %>% 
+  ggplot(aes(y = fct_infreq(status), fill=status)) +
+  geom_bar(show.legend = FALSE) +
+  geom_text(stat='count', aes(label=after_stat(count)), vjust=0.5, hjust=-0.2) +
+  theme_light() +
+  labs(title = "", caption="Source: clinicaltrials.gov",
+       y = "",
+       x = paste("Total COVID-19 Trials: ", n, sep = "")) +
+  scale_x_continuous(limits=c(0,3350))+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        plot.background = element_rect(fill = "white"),
+        axis.ticks.x = element_blank(),axis.ticks.y = element_blank(),
+        axis.text.x = element_blank(),
+        panel.border = element_blank(),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_text(size = 12, face = "bold.italic")) 
+```
