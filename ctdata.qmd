@@ -33,7 +33,7 @@ cvd %>%
   labs(title = "", caption="Source: clinicaltrials.gov",
        y = "",
        x = paste("Total COVID-19 Trials: ", n, sep = "")) +
-  scale_x_continuous(limits=c(0,3350))+
+  scale_x_continuous(limits=c(0,3700))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         plot.background = element_rect(fill = "white"),
         axis.ticks.x = element_blank(),axis.ticks.y = element_blank(),
